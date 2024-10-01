@@ -44,9 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'drf_yasg',
     'core',
     'data_consumption',
-    'api'
+    'api',
+    'documentation'
 ]
 
 MIDDLEWARE = [
@@ -147,7 +149,7 @@ CELERY_RESULT_BACKEND = config('CELERY_BROKER_URL')
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 CELERY_BEAT_SCHEDULE = {
     'get_popular_movie': {
-        'task': 'core.data_consumption.get_popular_movie',
+        'task': 'data_consumption.get_popular_movie',
         'schedule': crontab(minute=0, hour='*/2')
     },
 }
