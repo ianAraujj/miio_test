@@ -54,14 +54,14 @@ class TMDB(object):
             logging.error(f"Error list genres")
             return None
         
-    def list_popular_movies(self) -> Union[Dict, None]:
+    def list_popular_movies(self, page: int = 1) -> Union[Dict, None]:
         """
         Get a list of movies ordered by popularity.
 
         Returns:
             Union[Dict, None]: Dict or None
         """
-        r = requests.get(self.popular_movies_url, headers=self.headers)
+        r = requests.get(f"{self.popular_movies_url}?page={page}", headers=self.headers)
         
         try:
             return r.json()

@@ -1,9 +1,12 @@
 from django.db import models
+from core.utils.files import normalize_string
+from datetime import datetime
 import os
 
 def movie_file_directory(instance, filename):
+    now = datetime.now()
     return os.path.join(
-      "media", "movies", "ID_%s" % str(instance.id), filename)
+        "movies", str(now.year), str(now.month), normalize_string(instance.title), filename)
 
 class Movie(models.Model):
     
@@ -19,7 +22,7 @@ class Movie(models.Model):
     # assessment
     popularity = models.DecimalField(max_digits=15, decimal_places=4, default=0)
     vote_average = models.DecimalField(max_digits=15, decimal_places=4, default=0)
-    vote_count = models.IntegerField(default=0)
+    vote_count = models.PositiveIntegerField(default=0)
     
     # Files
     backdrop_path = models.FileField(upload_to=movie_file_directory, null=True, default=None)
