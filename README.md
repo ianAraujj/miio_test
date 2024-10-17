@@ -35,7 +35,7 @@ https://
 
 4. PUT `/movie/{id}/`: details in [Update a movie](https://github.com/ianAraujj/miio_test)
 
-## Configurações de Uso
+## Usage Settings
 
 You will need to copy the file in the root of the project called `.env.sample` to a file called `.env`
 
@@ -51,12 +51,13 @@ python -c "import secrets; print(secrets.token_urlsafe())"
 
 The result of this command must be inserted into the `.env` file in the `SECRET_KEY` variable.
 
-### Configurações do Docker
+### Docker Settings
 
 Você precisa ter o `docker` e o `docker-compose` instalado em sua máquina.
-A configuração mais curta, basta executar o comando `docker-compose up -d`
+A configuração mais curta, basta executar o comando:
+`docker-compose up -d`
 
-### Testes
+### Tests
 
 To run the tests, use the commands:
 
