@@ -7,7 +7,7 @@ CELERY_RESULT_BACKEND = config('CELERY_BROKER_URL')
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 CELERY_BEAT_SCHEDULE = {
     'get_popular_movie': {
-        'task': 'data_consumption.get_popular_movie',
+        'task': 'data_consumption.tasks.get_popular_movie',
         'schedule': crontab(minute=0, hour='*/2')
     },
 }

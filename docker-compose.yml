@@ -6,9 +6,8 @@ services:
     container_name: nginx_app
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      #- ./staticfiles:/static
-      #- ./media:/media
-      - ./:/code
+      - ./staticfiles:/static
+      - ./media:/media
     ports:
       - "80:80"
     depends_on:
@@ -18,10 +17,11 @@ services:
   db:
     image: postgres:latest
     container_name: db_app
+    env_file: .env
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: danger
-      POSTGRES_DB: movie_manager
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -67,8 +67,12 @@ services:
   redis:
     image: "redis:alpine"
     container_name: redis_app
+    restart: always
+    command: --port 32768
+    ports:
+      - "32768:32768"
     expose:
-      - "6379"
+      - "32768"    
 
 volumes:
   postgres_data:
